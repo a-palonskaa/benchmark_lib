@@ -23,7 +23,7 @@ static void group_deviation_push(double* elm, state_t state);
 
 //============================================================================================================
 
-const clock_t MIN_WARMUP_TIME = 10000000;
+const clock_t MIN_WARMUP_TIME = 1000000;
 const clock_t MAX_TEST_TIME = 10000000;
 const size_t CONTROL_GROUP_SIZE = 100;
 const double EPSILON = 1e-2;
@@ -93,7 +93,19 @@ void run_benchmark() {
 
     run_warmup();
     run_testing();
-    //print report
+    print_report();
+}
+
+void print_report() {
+    FILE* ostream = stdout;
+    fprintf(ostream, "[Warmup results]:\n\t[time]: %f\n\t[amount of tests]: %zu\n\n",
+           (double) benchmark()->warmup_results.time / CLOCKS_PER_SEC, benchmark()->warmup_results.tests_cnt);
+    fprintf(ostream, "[Testing results]:\n\t[time]: %f\n\t[amount of tests]: %zu\n\t"
+                     "[average time per test]: %f\n\t[average relative deviation of the group of %zu]: %f %%\n",
+                     (double) benchmark()->testing_results.time / CLOCKS_PER_SEC,
+                     benchmark()->testing_results.tests_cnt,
+                     (double)benchmark()->testing_results.average_time / CLOCKS_PER_SEC,
+                     CONTROL_GROUP_SIZE, benchmark()->testing_results.average_relative_deviation * 100);
 }
 
 //============================================================================================================

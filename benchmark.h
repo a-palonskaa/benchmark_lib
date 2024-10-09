@@ -56,6 +56,7 @@ typedef struct {
 
 benchmark_t* benchmark();
 void run_benchmark();
+void print_report();
 void benchmark_func(test_func_t test_func);
 
 void set_min_warmup_time(double seconds);
