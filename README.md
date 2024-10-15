@@ -88,7 +88,13 @@ The benchmark will output results to `stdout` in the following format:
 ### Example Output
 Here is an example of how the results might appear in the console:
 
-[Warmup results]: [time]: 2.500000 [amount of tests]: 5
+[Warmup results]:
+    [time]: 2.500000
+    [amount of tests]: 5
 
-[Testing results]: [time]: 10.000000 [amount of tests]: 100 [average time per test]: 0.100000 [average relative deviation of the group of 100]: 2.50 %
+[Testing results]:
+    [time]: 10.000000
+    [amount of tests]: 100
+    [average time per test]: 0.100000
+    [average relative deviation of the group of 100]: 2.50 %
 
