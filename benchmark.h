@@ -3,9 +3,11 @@
 
 #include <time.h>
 
-#include "circular_buffer.h"
+#include "queue.h"
 
 #define BENCHMARK(func) benchmark_func(func)
+
+#define DoNotOptimize(value) asm volatile("" : "+m"(value) : : "memory")
 
 typedef enum {
     STOP   = 0,
@@ -29,11 +31,14 @@ typedef struct {
 } testing_results_t;
 
 typedef struct {
-    test_func_t func;
     clock_t min_warmup_time;
-    size_t iterations;
     clock_t max_test_time;
+
+    size_t iterations;
     double epsilon;
+
+    test_func_t func;
+
     results_t warmup_results;
     results_t begin_results;
     testing_results_t testing_results;
@@ -49,7 +54,7 @@ typedef struct {
 } test_t;
 
 typedef struct {
-    circ_buffer_t* buffer;
+    circ_buffer_t buffer;
     double average;
     size_t length;
 } group_deviation_t;
@@ -61,5 +66,6 @@ void benchmark_func(test_func_t test_func);
 void set_min_warmup_time(double seconds);
 void set_epsilon(double epsilon);
 void set_max_testing_time(double seconds);
+void print_report();
 
 #endif /* BENCHMARK_H */

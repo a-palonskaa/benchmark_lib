@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "circular_buffer.h"
+#include "queue.h"
 
 error_t cb_ctor(circ_buffer_t* circ_buffer, size_t capacity, size_t elm_width) {
     if (!capacity) {
@@ -14,7 +14,7 @@ error_t cb_ctor(circ_buffer_t* circ_buffer, size_t capacity, size_t elm_width) {
     }
 
     circ_buffer->buffer_holder.buffer = calloc(capacity, elm_width);
-    if (!circ_buffer->buffer) {
+    if (!circ_buffer->buffer_holder.buffer) {
         return MEMORY_ALLOCATION_ERROR;
     }
 

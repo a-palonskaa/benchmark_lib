@@ -25,9 +25,13 @@ The Benchmark Library provides a framework for measuring the performance of func
 
     ```c
     void my_test_function(state_t state) {
+        DoNotOptimize({variable});
         // Function implementation
     }
     ```
+
+
+    Use DoNotOptimize() to guarantee accurate measurements.
 
 3. **Register the Test Function**:
 
